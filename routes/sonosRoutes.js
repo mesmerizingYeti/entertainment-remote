@@ -1,8 +1,10 @@
+const sonos = require("../config/sonos.js");
+
 module.exports = app => {
 
   // Get volume
   app.get("/sonos/volume", (req, res) => {
-    device.getVolume()
+    sonos.getVolume()
       .then(volume => {
         console.log(`current volume = ${volume}`);
         res.send({ volume });
@@ -13,7 +15,7 @@ module.exports = app => {
   // Set volume
   app.put("/sonos/volume", (req, res) => {
     if (typeof req.body.volume == "number" & 0 <= req.body.volume & req.body.volume <= 100) {
-      device.setVolume(req.body.volume);
+      sonos.setVolume(req.body.volume);
       res.sendStatus(200);
     }
     res.sendStatus(400);

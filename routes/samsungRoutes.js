@@ -18,7 +18,8 @@
 // Roku -  3201806016506
 // Vudu - 111012010001
 // Youtube - 111299001912
-
+const { KEYS } = require("samsung-tv-control");
+const samsung = require("../config/samsung.js");
 
 module.exports = app => {
 
@@ -60,18 +61,15 @@ module.exports = app => {
             break;
         };
       
-        control.sendKey(key, (err, result) => {
+        samsung.sendKey(key, (err, result) => {
           if (err) {
             next(err);
           } else {
             console.log(result);
-            res.locals.data = result;
+            res.send(result);
           } 
         });
       }
-    },
-    function (req, res) {
-      res.send(res.locals.data);
     }
   ]);
 
@@ -113,18 +111,15 @@ module.exports = app => {
             break;
         }
       
-        control.openApp(app, (err, result) => {
+        samsung.openApp(app, (err, result) => {
           if (err) {
             next(err);
           } else {
             console.log(result);
-            res.locals.data = result;
+            res.send(result);
           } 
         });
       }
-    },
-    function (req, res) {
-      res.send(res.locals.data);
     }
   ]);
 

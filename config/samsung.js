@@ -1,4 +1,4 @@
-const { Samsung, KEYS, APPS } = require("samsung-tv-control");
+const { Samsung } = require("samsung-tv-control");
 
 const config = {
   ip: "192.168.1.89",
@@ -7,14 +7,16 @@ const config = {
   saveToken: true
 };
 
-const control = new Samsung(config);
+const samsung = new Samsung(config);
 
-control.turnOn();
+samsung.turnOn();
 
-control.isAvailable()
+samsung.isAvailable()
   .then(() => {
-    control.getToken(token => {
+    samsung.getToken(token => {
       console.info("# Response getToken:", token);
     })
   })
   .catch(err => console.error(err))
+
+module.exports = samsung;

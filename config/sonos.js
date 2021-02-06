@@ -1,3 +1,5 @@
 const { Sonos } = require("sonos");
 
-const device = new Sonos("192.168.1.126");
+const sonos = new Sonos("192.168.1.126");
+
+module.exports = sonos;
