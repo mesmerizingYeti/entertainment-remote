@@ -9,55 +9,123 @@
 // KEY_PLAY -- toggles play and pause
 
 // APPS
+// Disney+ - 3201901017640
+// Google Play Movies - 3201601007250
+// HBO Max - 3201601007230
 // Hulu - 3201601007625
 // Netflix - 11101200001
 // Prime Video - 3201512006785
-// Youtube - 111299001912
-// Google Play Movies & TV - 3201601007250
-// Roku - 3201806016506
+// Roku -  3201806016506
 // Vudu - 111012010001
-// HBO Max - 3201601007230
-// Disney+ - 3201901017640
+// Youtube - 111299001912
 
 
 module.exports = app => {
 
-  app.get("/samsung", (req, res) => {
-    // 192.168.1.89
-    // d4:9d:c0:fc:05:33
-
-    const { Samsung, KEYS, APPS } = require("samsung-tv-control");
-
-    const config = {
-      ip: "192.168.1.89",
-      mac: "D49DC0FC0533",
-      nameApp: "Entertainment-Remote",
-      saveToken: true
-    };
-
-    const control = new Samsung(config);
-
-    control.turnOn();
-    console.log("Control is turned on")
-    control.isAvailable()
-      .then(() => {
-        // Get token for API
-        console.log("Getting token");
-        control.getToken(token => {
-          console.info("# Response getToken:", token);
-          control.openApp("3201601007230", (err, result) => {
-            if (!err) {
-              res.json(result);
-            }
-          });
+  app.put("/samsung/key", [
+    function (req, res, next) {
+      console.log(req.body.key);
+      if (typeof req.body.key == "string") {
+       let key;
+        switch(req.body.key) {
+          case "power":
+            key = KEYS.KEY_POWER;
+            break;
+          case "home":
+            key = KEYS.KEY_HOME;
+            break;
+          case "left":
+            key = KEYS.KEY_LEFT;
+            break;
+          case "right":
+            key = KEYS.KEY_RIGHT;
+            break;
+          case "up":
+            key = KEYS.KEY_UP;
+            break;
+          case "down":
+            key = KEYS.KEY_DOWN;
+            break;
+          case "enter":
+            key = KEYS.KEY_ENTER;
+            break;
+          case "return":
+            key = KEYS.KEY_RETURN;
+            break;
+          case "play":
+            key = KEYS.KEY_PLAY;
+            break;
+          default:
+            key = null;
+            break;
+        };
+      
+        control.sendKey(key, (err, result) => {
+          if (err) {
+            next(err);
+          } else {
+            console.log(result);
+            res.locals.data = result;
+          } 
         });
+      }
+    },
+    function (req, res) {
+      res.send(res.locals.data);
+    }
+  ]);
 
-
-      })
-      .catch(err => {
-        console.log(err);
-        res.sendStatus(404);
-      })
-  });
+  app.put("/samsung/app", [
+    function (req, res, next) {
+      console.log(req.body.app);
+      if (typeof req.body.app == "string") {
+        let app;
+        switch (req.body.app) {
+          case "Disney+":
+            app = "3201901017640";
+            break;
+          case "Google Play Movies":
+            app = "3201601007250";
+            break;
+          case "HBO Max":
+            app = "3201601007230";
+            break;
+          case "Hulu":
+            app = "3201601007625";
+            break;
+          case "Netflix":
+            app = "11101200001";
+            break;
+          case "Prime Video":
+            app = "3201512006785";
+            break;
+          case "Roku Channel":
+            app = "3201806016506";
+            break;
+          case "Vudu":
+            app = "111012010001";
+            break;
+          case "Youtube":
+            app = "111299001912";
+            break;
+          default:
+            app = null;
+            break;
+        }
+      
+        control.openApp(app, (err, result) => {
+          if (err) {
+            next(err);
+          } else {
+            console.log(result);
+            res.locals.data = result;
+          } 
+        });
+      }
+    },
+    function (req, res) {
+      res.send(res.locals.data);
+    }
+  ]);
 
 }
