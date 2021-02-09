@@ -60,16 +60,28 @@ const VolumeSlider = withStyles({
 const VolumeControl = () => {
   const classes = useStyles();
   const [volume, setVolume] = useState(1);
+  const [muted, setMuted] = useState(false);
 
-  const handleChange = (event, newVolume) => {
+  const handleChangeVolume = (event, newVolume) => {
     axios.put("/sonos/volume", { volume: newVolume })
       .then(() => setVolume(newVolume))
       .catch(err => console.error(err))
   }
 
+  const handleChangeMuted = () => {
+    axios.put("/sonos/muted", { muted: !muted })
+      .then(() => setMuted(!muted))
+      .catch(err => console.error(err))
+  }
+
   useEffect(() => {
     axios.get("/sonos/volume")
-      .then(({ data }) => setVolume(data.volume))
+      .then(({ data }) => {
+        setVolume(data.volume);
+        axios.get("/sonos/muted")
+          .then(({ data }) => console.log(data))
+          .catch(err => console.error(err))
+      })
       .catch(err => console.error(err))
   }, [])
 
@@ -95,7 +107,7 @@ const VolumeControl = () => {
               <VolumeSlider 
                 valueLabelDisplay="auto"
                 value={volume}
-                onChange={handleChange}
+                onChange={handleChangeVolume}
               />
             </Grid>
             <Grid item>
@@ -105,11 +117,12 @@ const VolumeControl = () => {
         </Grid>
         <Grid item>
           <Button
-            variant="outlined"
+            variant={muted ? "contained" : "outlined"}
             color="secondary"
             className={classes.muteButton}
+            onClick={handleChangeMuted}
           >
-            Mute
+            {muted ? "Unmute" : "Mute"}
           </Button>
         </Grid>
       </Grid>
