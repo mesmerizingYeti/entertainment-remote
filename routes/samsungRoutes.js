@@ -92,6 +92,9 @@ module.exports = app => {
       if (typeof req.body.app == "string") {
         let app;
         switch (req.body.app) {
+          case "Amazon Prime Video":
+            app = "3201512006785";
+            break;
           case "CBS All Access":
             app = "3201710014981";
             break;
@@ -109,9 +112,6 @@ module.exports = app => {
             break;
           case "Netflix":
             app = "11101200001";
-            break;
-          case "Prime Video":
-            app = "3201512006785";
             break;
           case "Roku Channel":
             app = "3201806016506";

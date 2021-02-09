@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Grid,
   Button
@@ -32,6 +33,12 @@ const useStyles = makeStyles({
 const AppsControl = () => {
   const classes = useStyles();
 
+  const handleClick = app => () => {
+    axios.put("/samsung/apps", { app })
+      .then(() => console.log(`Opening ${app}`))
+      .catch(err => console.error(err))
+  };
+
   return(
     <Grid
       container
@@ -51,6 +58,7 @@ const AppsControl = () => {
           variant="contained"
           color="default"
           className={classes.appButton}
+          onClick={handleClick("Amazon Prime Video")}
         >
           <img 
             src={amazonPrimeVideoLogo} 
@@ -62,6 +70,7 @@ const AppsControl = () => {
           variant="contained"
           color="default"
           className={classes.appButton}
+          onClick={handleClick("CBS All Access")}
         >
           <img 
             src={cbsAllAccessLogo} 
@@ -73,6 +82,7 @@ const AppsControl = () => {
           variant="contained"
           color="default"
           className={classes.appButton}
+          onClick={handleClick("Disney+")}
         >
           <img 
             src={disneyPlusLogo} 
@@ -93,6 +103,7 @@ const AppsControl = () => {
           variant="contained"
           color="default"
           className={classes.appButton}
+          onClick={handleClick("Google Play Movies")}
         >
           <img 
             src={googlePlayMoviesTvLogo} 
@@ -104,6 +115,7 @@ const AppsControl = () => {
           variant="contained"
           color="default"
           className={classes.appButton}
+          onClick={handleClick("HBO Max")}
         >
           <img 
             src={hboMaxLogo} 
@@ -115,6 +127,7 @@ const AppsControl = () => {
           variant="contained"
           color="default"
           className={classes.appButton}
+          onClick={handleClick("Hulu")}
         >
           <img 
             src={huluLogo} 
@@ -135,6 +148,7 @@ const AppsControl = () => {
           variant="contained"
           color="default"
           className={classes.appButton}
+          onClick={handleClick("Netflix")}
         >
           <img 
             src={netflixLogo} 
@@ -146,6 +160,7 @@ const AppsControl = () => {
           variant="contained"
           color="default"
           className={classes.appButton}
+          onClick={handleClick("Vudu")}
         >
           <img 
             src={vuduLogo} 
@@ -157,6 +172,7 @@ const AppsControl = () => {
           variant="contained"
           color="default"
           className={classes.appButton}
+          onClick={handleClick("Youtube")}
         >
           <img 
             src={youtubeLogo} 
