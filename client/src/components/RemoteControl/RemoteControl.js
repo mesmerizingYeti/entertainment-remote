@@ -10,6 +10,7 @@ import UndoIcon from '@material-ui/icons/Undo';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 import DirectionPad from "../DirectionPad";
+import VolumeControl from "../VolumeControl";
 
 const useStyles = makeStyles({
   powerButton: {
@@ -97,6 +98,16 @@ const RemoteControl = () => {
           >
             <PlayArrowIcon />
           </Button>
+        </Grid>
+        <Grid
+          item
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          className={classes.directionPad}
+        >
+          <VolumeControl />
         </Grid>
       </Grid>
     </>
