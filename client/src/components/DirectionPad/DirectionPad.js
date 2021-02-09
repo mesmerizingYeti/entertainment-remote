@@ -13,7 +13,6 @@ const useStyles = makeStyles({
   container: {
     width: "50vw",
     height: "50vw",
-    marginLeft: "15vw"
   },
   verticalButton: {
     position: "relative",
