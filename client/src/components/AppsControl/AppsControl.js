@@ -34,7 +34,7 @@ const AppsControl = () => {
   const classes = useStyles();
 
   const handleClick = app => () => {
-    axios.put("/samsung/apps", { app })
+    axios.put("/samsung/app", { app })
       .then(() => console.log(`Opening ${app}`))
       .catch(err => console.error(err))
   };
