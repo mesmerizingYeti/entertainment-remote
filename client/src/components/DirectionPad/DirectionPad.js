@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Button,
   Grid
@@ -38,6 +39,11 @@ const useStyles = makeStyles({
 const DirectionPad = () => {
   const classes = useStyles();
 
+  const handleClick = key => () => {
+    axios.put("/samsung/key", { key })
+      .catch(err => console.error(err))
+  }
+
   return (
     <>
       <Grid
@@ -58,6 +64,7 @@ const DirectionPad = () => {
             className={classes.verticalButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("up")}
           >
             <ArrowUpwardIcon/>
           </Button>
@@ -74,6 +81,7 @@ const DirectionPad = () => {
             className={classes.horizontalButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("left")}
           >
             <ArrowBackIcon />
           </Button>
@@ -82,12 +90,14 @@ const DirectionPad = () => {
             className={classes.enterButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("enter")}
           />
           {/* Right Button */}
           <Button 
             className={classes.horizontalButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("right")}
           >
             <ArrowForwardIcon />
           </Button>
@@ -104,6 +114,7 @@ const DirectionPad = () => {
             className={classes.verticalButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("down")}
           >
             <ArrowDownwardIcon />
           </Button>

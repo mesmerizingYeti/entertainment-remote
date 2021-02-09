@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Grid,
   Button
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
     marginTop: "2.5vw",
     marginBottom: "2.5vw",
   },
-  undoButton: {
+  returnButton: {
     width: "20vw",
     height: "15vw"
   },
@@ -38,6 +39,11 @@ const useStyles = makeStyles({
 
 const RemoteControl = () => {
   const classes = useStyles();
+
+  const handleClick = key => () => {
+    axios.put("/samsung/key", { key })
+      .catch(err => console.error(err))
+  }
 
   return (
     <>
@@ -57,6 +63,7 @@ const RemoteControl = () => {
             variant="contained"
             color="primary"
             className={classes.powerButton}
+            onClick={handleClick("power")}
           >
             <PowerSettingsNewIcon />
           </Button>
@@ -64,6 +71,7 @@ const RemoteControl = () => {
             variant="contained"
             color="primary"
             className={classes.homeButton}
+            onClick={handleClick("home")}
           >
             <HomeIcon />
           </Button>
@@ -87,7 +95,8 @@ const RemoteControl = () => {
           <Button
             variant="contained"
             color="primary"
-            className={classes.undoButton}
+            className={classes.returnButton}
+            onClick={handleClick("return")}
           >
             <UndoIcon />
           </Button>
@@ -95,6 +104,7 @@ const RemoteControl = () => {
             variant="contained"
             color="primary"
             className={classes.playButton}
+            onClick={handleClick("play")}
           >
             <PlayArrowIcon />
           </Button>
