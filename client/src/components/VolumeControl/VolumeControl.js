@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Paper,
@@ -8,6 +8,7 @@ import {
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
+import axios from "axios";
 
 const useStyles = makeStyles({
   paper: {
@@ -58,11 +59,19 @@ const VolumeSlider = withStyles({
 
 const VolumeControl = () => {
   const classes = useStyles();
-  const [volume, setVolume] = useState(15);
+  const [volume, setVolume] = useState(1);
 
   const handleChange = (event, newVolume) => {
-    setVolume(newVolume);
+    axios.put("/sonos/volume", { volume: newVolume })
+      .then(() => setVolume(newVolume))
+      .catch(err => console.error(err))
   }
+
+  useEffect(() => {
+    axios.get("/sonos/volume")
+      .then(({ data }) => setVolume(data.volume))
+      .catch(err => console.error(err))
+  }, [])
 
   return (
     <Paper className={classes.paper}>
