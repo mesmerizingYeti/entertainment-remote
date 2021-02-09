@@ -9,6 +9,7 @@
 // KEY_PLAY -- toggles play and pause
 
 // APPS
+// CBS All Access - 3201710014981
 // Disney+ - 3201901017640
 // Google Play Movies - 3201601007250
 // HBO Max - 3201601007230
@@ -22,6 +23,18 @@ const { KEYS } = require("samsung-tv-control");
 const samsung = require("../config/samsung.js");
 
 module.exports = app => {
+
+  app.get("/samsung/test", [
+    function (req, res, next) {
+      samsung.getAppsFromTV((err, result) => {
+        if (err) {
+          next(err);
+        } else {
+          res.send(result);
+        }
+      })
+    }
+  ])
 
   app.put("/samsung/key", [
     function (req, res, next) {
@@ -79,6 +92,9 @@ module.exports = app => {
       if (typeof req.body.app == "string") {
         let app;
         switch (req.body.app) {
+          case "CBS All Access":
+            app = "3201710014981";
+            break;
           case "Disney+":
             app = "3201901017640";
             break;
