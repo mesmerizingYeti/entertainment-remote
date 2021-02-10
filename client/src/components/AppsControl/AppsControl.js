@@ -18,12 +18,12 @@ import youtubeLogo from "./images/YouTube_Logo.svg";
 
 const useStyles = makeStyles({
   appButton: {
-    height: "15vw",
+    height: "30vw",
     width: "30vw"
   },
   appLogo: {
-    maxHeight: "10vw",
-    maxWidth: "28vw"
+    maxHeight: "25vw",
+    maxWidth: "25vw"
   },
   row: {
     marginBottom: "7px"

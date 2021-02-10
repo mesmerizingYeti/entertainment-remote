@@ -12,7 +12,8 @@ import axios from "axios";
 
 const useStyles = makeStyles({
   paper: {
-    padding: "5px"
+    padding: "5px",
+    backgroundColor: "#1F31"
   },
   volumeIcons: {
     color: "white"
@@ -86,7 +87,9 @@ const VolumeControl = () => {
   }, [])
 
   return (
-    <Paper className={classes.paper}>
+    <Paper
+      className={classes.paper}
+    >
       <Grid
         container
         justify="space-around"
