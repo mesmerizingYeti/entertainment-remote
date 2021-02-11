@@ -69,6 +69,9 @@ module.exports = app => {
           case "play":
             key = KEYS.KEY_PLAY;
             break;
+          case "pause":
+            key = KEYS.KEY_PAUSE;
+            break;
           default:
             key = null;
             break;
