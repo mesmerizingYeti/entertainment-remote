@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Button,
   Grid
@@ -11,32 +12,36 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   container: {
-    width: "50vw",
-    height: "50vw",
+    width: "65vw",
+    height: "60vw"
   },
   verticalButton: {
     position: "relative",
-    height: "9.874vw",
-    width: "30vw",
+    height: "15vw",
+    width: "20vw",
     zIndex: "1"
   },
   horizontalButton: {
     position: "relative",
-    height: "30vw",
-    width: "10vw",
-    minWidth: "10vw",
+    height: "20vw",
+    width: "15vw",
     zIndex: "1"
   },
   enterButton: {
-    height: "26.24vw",
-    width: "26vw",
-    margin: "2vw",
+    height: "24vw",
+    width: "24.82vw",
+    margin: "3vw",
     zIndex: "1"
   },
 });
 
 const DirectionPad = () => {
   const classes = useStyles();
+
+  const handleClick = key => () => {
+    axios.put("/samsung/key", { key })
+      .catch(err => console.error(err))
+  }
 
   return (
     <>
@@ -58,6 +63,7 @@ const DirectionPad = () => {
             className={classes.verticalButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("up")}
           >
             <ArrowUpwardIcon/>
           </Button>
@@ -74,6 +80,7 @@ const DirectionPad = () => {
             className={classes.horizontalButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("left")}
           >
             <ArrowBackIcon />
           </Button>
@@ -82,12 +89,14 @@ const DirectionPad = () => {
             className={classes.enterButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("enter")}
           />
           {/* Right Button */}
           <Button 
             className={classes.horizontalButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("right")}
           >
             <ArrowForwardIcon />
           </Button>
@@ -104,6 +113,7 @@ const DirectionPad = () => {
             className={classes.verticalButton}
             variant="contained"
             color="primary"
+            onClick={handleClick("down")}
           >
             <ArrowDownwardIcon />
           </Button>
