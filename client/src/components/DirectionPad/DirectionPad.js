@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   container: {
     width: "65vw",
-    height: "60vw"
+    height: "60vw",
   },
   verticalButton: {
     position: "relative",
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
   enterButton: {
     height: "24vw",
-    width: "24.82vw",
+    width: "27vw",
     margin: "3vw",
     zIndex: "1"
   },
