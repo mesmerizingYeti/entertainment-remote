@@ -9,14 +9,13 @@ const config = {
 
 const samsung = new Samsung(config);
 
-samsung.turnOn();
-
-samsung.isAvailable()
-  .then(() => {
-    samsung.getToken(token => {
-      console.info("# Response getToken:", token);
-    })
-  })
+samsung.turnOn()
+  .then(value => (value ? samsung.isAvailable() : null))
+  .then(() => 
+    samsung.getToken(token => 
+      console.info("# Response getToken:", token)
+    )
+  )
   .catch(err => console.error(err))
 
 module.exports = samsung;
