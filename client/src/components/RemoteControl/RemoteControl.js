@@ -9,6 +9,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import HomeIcon from '@material-ui/icons/Home';
 import UndoIcon from '@material-ui/icons/Undo';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
 
 import DirectionPad from "../DirectionPad";
 import VolumeControl from "../VolumeControl";
@@ -19,22 +20,14 @@ const useStyles = makeStyles({
     width: "20vw",
     height: "15vw"
   },
-  homeButton: {
+  mainButton: {
     width: "20vw",
     height: "15vw"
   },
   directionPad: {
     marginTop: "2.5vw",
     marginBottom: "2.5vw",
-  },
-  returnButton: {
-    width: "20vw",
-    height: "15vw"
-  },
-  playButton: {
-    width: "20vw",
-    height: "15vw"
-  },
+  }
 });
 
 const RemoteControl = () => {
@@ -70,7 +63,7 @@ const RemoteControl = () => {
           <Button
             variant="contained"
             color="primary"
-            className={classes.homeButton}
+            className={classes.mainButton}
             onClick={handleClick("home")}
           >
             <HomeIcon />
@@ -89,13 +82,13 @@ const RemoteControl = () => {
         <Grid
           item
           container
-          justify="space-around"
+          justify="space-evenly"
           alignItems="center"
         >
           <Button
             variant="contained"
             color="primary"
-            className={classes.returnButton}
+            className={classes.mainButton}
             onClick={handleClick("return")}
           >
             <UndoIcon />
@@ -103,10 +96,18 @@ const RemoteControl = () => {
           <Button
             variant="contained"
             color="primary"
-            className={classes.playButton}
+            className={classes.mainButton}
             onClick={handleClick("play")}
           >
             <PlayArrowIcon />
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.mainButton}
+            onClick={handleClick("pause")}
+          >
+            <PauseIcon />
           </Button>
         </Grid>
         <Grid

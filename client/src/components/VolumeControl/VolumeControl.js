@@ -13,7 +13,8 @@ import axios from "axios";
 const useStyles = makeStyles({
   paper: {
     padding: "5px",
-    backgroundColor: "#1F31"
+    backgroundColor: "rgb(63, 81, 181)",
+    color: "white"
   },
   volumeIcons: {
     color: "white"
