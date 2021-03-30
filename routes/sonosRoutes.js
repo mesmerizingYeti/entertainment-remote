@@ -24,10 +24,7 @@ module.exports = app => {
   // Get mute state
   app.get("/sonos/muted", (req, res) => {
     sonos.getMuted()
-      .then(result => {
-        console.log(result);
-        res.sendStatus(200);
-      })
+      .then(result => res.send(result))
       .catch(err => console.error(err))
   });
 

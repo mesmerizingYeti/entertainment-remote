@@ -12,11 +12,11 @@ app.use(express.json());
 
 require("./routes")(app);
 
-const { SmartThingsClient, BearerTokenAuthenticator } = require("@smartthings/core-sdk");
-const client = new SmartThingsClient(new BearerTokenAuthenticator(env.ACCESS_TOKEN));
-client.devices.list()
-  .then((devices) => console.log(JSON.stringify(devices)))
-  .catch(err => console.error(err))
+// const { SmartThingsClient, BearerTokenAuthenticator } = require("@smartthings/core-sdk");
+// const client = new SmartThingsClient(new BearerTokenAuthenticator(process.env.ACCESS_TOKEN));
+// client.devices.list()
+//   .then((devices) => console.log(JSON.stringify(devices)))
+//   .catch(err => console.error(err))
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
